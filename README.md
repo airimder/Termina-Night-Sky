@@ -25,12 +25,6 @@ The port matches the decompiled code exactly, and its output has been compared w
 | `render.js` | Draws the star map as a fisheye looking straight up |
 | `look.js` | The **In game** view: a 320 × 240 frame with a 60° field of view, stars drawn as the game draws them |
 
-There is no build step and there are no dependencies. To run it locally, serve the folder with any static server (for example `python -m http.server`) and open `http://localhost:8000`. It has to be served rather than opened as a file, because browsers block ES modules on `file://` URLs.
-
-## Publishing on GitHub Pages
-
-Push the folder to a repository, then go to **Settings → Pages** and choose **Deploy from a branch** with your main branch and `/ (root)`. The site appears at `https://<username>.github.io/<repository>/`.
-
 ## Notes
 
 - Downloads up to 8192 × 8192 work in Chrome, Edge and Firefox. Safari limits canvas size, so it may only manage 4096.
