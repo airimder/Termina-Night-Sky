@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Termina Night Sky</title>
+  <meta name="description" content="See the night sky Majora's Mask generates from your file name.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Termina Night Sky</h1>
+      <p class="lede">In <cite>Majora's Mask</cite>, the stars over Termina are worked out from the player's name, so every file has its own night sky. Type a name to see yours.</p>
+    </header>
+
+    <section class="controls" aria-label="Sky settings">
+      <label class="name-field">
+        <span class="label">File name</span>
+        <input id="name" type="text" maxlength="8" autocomplete="off" spellcheck="false" value="Link"
+               aria-describedby="name-help">
+      </label>
+      <p id="name-help" class="help">Up to 8 characters: letters, digits, space, <kbd>.</kbd> and <kbd>-</kbd>, as on the file select screen. Capital letters count, so <q>Link</q> and <q>LINK</q> have different skies.</p>
+      <div id="bytes" class="bytes" aria-live="polite"></div>
+
+      <fieldset class="presets">
+        <legend class="label">Stars</legend>
+        <div id="presets" class="chips"></div>
+      </fieldset>
+    </section>
+
+    <div class="views" role="group" aria-label="View">
+      <button type="button" class="view-tab" data-view="map" aria-pressed="true">Star map</button>
+      <button type="button" class="view-tab" data-view="game" aria-pressed="false">In game</button>
+    </div>
+
+    <figure class="sky" id="map-view">
+      <canvas id="sky" width="2048" height="2048" role="img" aria-label="Night sky"></canvas>
+      <figcaption>Looking straight up: the centre is overhead and the ring is the horizon.</figcaption>
+    </figure>
+
+    <figure class="sky game" id="game-view" hidden>
+      <canvas id="game" tabindex="0" aria-label="In-game view of the night sky. Drag or use the arrow keys to look around."></canvas>
+      <div class="game-controls">
+        <label class="check"><input id="drift" type="checkbox"> Slowly turn</label>
+      </div>
+      <figcaption>Drag, or use the arrow keys, to look around. The stars are drawn as the N64 draws them: tiny rectangles in a 320 × 240 frame, recalculated every time the camera moves. Stars narrower than a pixel shimmer as they cross from one pixel to the next. The sky colour and the ground are stand-ins for the scenery.</figcaption>
+    </figure>
+
+    <section class="export" id="export" aria-label="Download">
+      <label>
+        <span class="label">Image size</span>
+        <select id="size">
+          <option value="2048">2048 × 2048</option>
+          <option value="4096" selected>4096 × 4096</option>
+          <option value="8192">8192 × 8192</option>
+        </select>
+      </label>
+      <label class="check"><input id="caption" type="checkbox" checked> Include caption</label>
+      <div class="buttons">
+        <button id="download" type="button">Download PNG</button>
+        <button id="share" type="button" class="secondary">Copy link</button>
+      </div>
+      <p id="status" class="help" role="status"></p>
+    </section>
+
+    <details class="how">
+      <summary>How it works</summary>
+      <p>The game turns the 8 characters of the file name into a 32-bit seed by shifting each character code by a different amount and combining them. Unused characters count as spaces. Every frame, it uses that seed to run its random number generator and redraws the stars from scratch. Nothing is stored, which is why the sky can't be pulled out of the game's files.</p>
+      <p>The first 16 stars are the same on every file, a small blue constellation with one orange star. After that, each star takes four random numbers: two averaged together for height (so most stars sit low near the horizon), one for direction, and one for size. Their colour steps through a pale violet-to-pink list every 64 stars.</p>
+      <p>Each area asks for a different number of stars, and always draws the first ones from the same list. So the 300 stars over Clock Town are the first 300 of the 1,500 at the Great Bay Temple entrance.</p>
+      <p>This page is a direct port of <code>Environment_DrawSkyboxStarsImpl</code> from the <a href="https://github.com/zeldaret/mm">Majora's Mask decompilation</a>. The star counts were read from the US version's area data.</p>
+    </details>
+
+    <footer>
+      <p>A fan project. Not affiliated with or endorsed by Nintendo. <cite>The Legend of Zelda: Majora's Mask</cite> is a trademark of Nintendo.</p>
+    </footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
