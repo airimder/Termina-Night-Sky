@@ -182,10 +182,10 @@ export function generateStars(nameBytes, count, day = 1) {
 
 // Star counts read from the US ROM's scene actor lists (En_Test4 / En_Weather_Tag params).
 export const PRESETS = [
-  { count: 200, places: "Ikana Canyon, Pirates' Fortress, Stone Tower" },
+  { count: 200, places: "Romani Ranch, Pirates' Fortress, Pinnacle Rock" },
   { count: 300, places: "Clock Town, Termina Field, Ikana Castle, Stone Tower Temple" },
   { count: 400, places: "Great Bay Coast, Zora Cape, Milk Road, Ikana Graveyard" },
   { count: 600, places: "Southern Swamp, Woods of Mystery, Goron Village in spring" },
   { count: 1000, places: "Clock Tower rooftop, Mountain Village in spring" },
-  { count: 1500, places: "Great Bay Temple entrance, the most any scene asks for" },
+  { count: 1500, places: "A Great Bay cutscene, the most any scene asks for" },
 ];

@@ -68,7 +68,8 @@
       <summary>How it works</summary>
       <p>The game turns the 8 characters of the file name into a 32-bit seed by shifting each character code by a different amount and combining them. Unused characters count as spaces. Every frame, it uses that seed to run its random number generator and redraws the stars from scratch. Nothing is stored, which is why the sky can't be pulled out of the game's files.</p>
       <p>The first 16 stars are the same on every file, a small blue constellation with one orange star. After that, each star takes four random numbers: two averaged together for height (so most stars sit low near the horizon), one for direction, and one for size. Their colour steps through a pale violet-to-pink list every 64 stars.</p>
-      <p>Each area asks for a different number of stars, and always draws the first ones from the same list. So the 300 stars over Clock Town are the first 300 of the 1,500 at the Great Bay Temple entrance.</p>
+      <p>Each area asks for a different number of stars, and always draws the first ones from the same list. So the 300 stars over Clock Town and Termina Field are the first 300 of the full 1,500.</p>
+      <p>On the second night, the rainy one, most of Termina switches to a cloudy night sky and shows no stars at all. Great Bay, the Southern Swamp and the mountains keep theirs.</p>
       <p>This page is a direct port of <code>Environment_DrawSkyboxStarsImpl</code> from the <a href="https://github.com/zeldaret/mm">Majora's Mask decompilation</a>. The star counts were read from the US version's area data.</p>
     </details>
 
